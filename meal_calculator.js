@@ -3,7 +3,6 @@ function Diner(dishes, dinerBill) {
   this.bill = dinerBill;
 };
 
-// inherit dinerBill/bill from Diners to calculate total w/tax & tip factored in?
 function totalBill(tax, tip) {
   this.tax = tax;
   this.tip = tip;
@@ -24,7 +23,10 @@ console.log("Pat's bill without tax and tip: $" + parseFloat(Pat.bill).toFixed(2
 // 9.25% tax rate, 15% tip
 var payment = new totalBill(.0925, .15);
 
-console.log("Total without tax is: $" + parseFloat(Kevin.bill + Pat.bill).toFixed(2));
+console.log("Total without tax for Kevin is: $" + parseFloat(Kevin.bill).toFixed(2));
+console.log("Total without tax for Pat is: $" + parseFloat(Pat.bill).toFixed(2));
+
+console.log("Total without tax for both is: $" + parseFloat(Kevin.bill + Pat.bill).toFixed(2));
 
 console.log("Tax (9.25%) is: $" + parseFloat((Kevin.bill + Pat.bill) * payment.tax).toFixed(2));
 
@@ -32,4 +34,8 @@ console.log("Total with tax = $" + parseFloat(Kevin.bill + Pat.bill + ((Kevin.bi
 
 console.log("Tip (15%) is: $" + parseFloat((Kevin.bill + Pat.bill) * payment.tip).toFixed(2));
 
-console.log("Total with tax AND tip = $" + parseFloat(Kevin.bill + Pat.bill + ((Kevin.bill + Pat.bill) * payment.tax) + ((Kevin.bill + Pat.bill) * payment.tip)).toFixed(2));
+$('.total_bill').html("The total bill (both Pat and Kevin) with tax and tip factored in, comes to $" + parseFloat(Kevin.bill + Pat.bill + ((Kevin.bill + Pat.bill) * payment.tax) + ((Kevin.bill + Pat.bill) * payment.tip)).toFixed(2) + ".");
+
+console.log(Kevin);
+
+$('.diner_breakdown tbody').html('<tr><td>Food total</td><td>$' + Kevin.bill + '</td><td>$' + Pat.bill.toFixed(2) + '</td></tr><tr><td>Tax total</td><td>$' + parseFloat(Kevin.bill * payment.tax).toFixed(2) + '</td><td>$' + parseFloat(Pat.bill * payment.tax).toFixed(2) + '</td></tr><tr><td>Tip total</td><td>$' + parseFloat(Kevin.bill * payment.tip).toFixed(2) + '</td><td>$' + (Pat.bill * payment.tip).toFixed(2) + '</td></tr>');
